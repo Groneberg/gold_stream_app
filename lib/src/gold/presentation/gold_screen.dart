@@ -44,12 +44,6 @@ class GoldScreen extends StatelessWidget {
                   return Text('No data');
                 }
               }),
-              Text(
-                NumberFormat.simpleCurrency(locale: 'de_DE').format(goldPrice),
-                style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
             ],
           ),
         ),
