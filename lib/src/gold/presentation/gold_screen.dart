@@ -27,23 +27,31 @@ class GoldScreen extends StatelessWidget {
               SizedBox(height: 20),
               // TODO: Verwende einen StreamBuilder, um den Goldpreis live anzuzeigen
               // statt des konstanten Platzhalters
-              StreamBuilder(stream: getGoldPriceStream(), builder: (BuildContext context, AsyncSnapshot<double> snapshot) {
-                if (snapshot.hasError) {
-                  return Text('Error: ${snapshot.error}');
-                } else if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
-                } else if (snapshot.hasData) {
-                  final double goldPrice = snapshot.data!;
-                  return Text(
-                    NumberFormat.simpleCurrency(locale: 'de_DE').format(goldPrice),
-                    style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                  );
-                } else {
-                  return Text('No data');
-                }
-              }),
+              StreamBuilder(
+                stream: getGoldPriceStream(),
+                builder:
+                    (BuildContext context, AsyncSnapshot<double> snapshot) {
+                      if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.waiting) {
+                        return CircularProgressIndicator();
+                      } else if (snapshot.hasData) {
+                        final double goldPrice = snapshot.data!;
+                        return Text(
+                          NumberFormat.simpleCurrency(
+                            locale: 'de_DE',
+                          ).format(goldPrice),
+                          style: Theme.of(context).textTheme.headlineLarge!
+                              .copyWith(
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                        );
+                      } else {
+                        return Text('No data');
+                      }
+                    },
+              ),
             ],
           ),
         ),
